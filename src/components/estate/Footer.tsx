@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import logoImg from "@/assets/logo.png";
 
 const cols = [
   {
@@ -25,14 +26,9 @@ export const Footer = () => {
       <div className="container">
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="h-10 w-10 rounded-sm bg-gradient-gold flex items-center justify-center shadow-gold">
-                <span className="font-display text-navy font-bold text-xl leading-none">E</span>
-              </div>
-              <div className="leading-tight">
-                <div className="font-display text-cream text-2xl tracking-wide">EstateEdge</div>
-                <div className="text-[10px] uppercase tracking-[0.25em] text-gold">UK</div>
-              </div>
+            <div className="flex items-center gap-0 mb-6">
+              <img src={logoImg} alt="EstateEdge Logo" className="h-16 w-auto object-contain" />
+              <span className="font-display text-cream text-lg tracking-wide">EstateEdge</span>
             </div>
             <p className="text-cream/65 text-sm max-w-sm leading-relaxed">
               Your edge in the UK property market. Premium listings, expert agents and transparent advice — from London to the Highlands.
@@ -70,12 +66,9 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-cream/10 grid md:grid-cols-2 gap-6 items-center">
+        <div className="mt-16 pt-8 border-t border-cream/10 text-center">
           <p className="text-cream/50 text-xs">
-            © 2026 EstateEdge UK Ltd. All Rights Reserved. Registered in England & Wales No. 11428392.
-          </p>
-          <p className="text-cream/50 text-xs md:text-right">
-            EstateEdge UK is authorised and regulated by the Financial Conduct Authority (FCA No. 845210). RICS Regulated Firm.
+            Powered By <a href="https://axistechgroup.com/" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline transition-all">AxisTechGroup</a>
           </p>
         </div>
       </div>

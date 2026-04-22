@@ -6,7 +6,6 @@ import { WhyChoose } from "@/components/estate/WhyChoose";
 import { MortgageCalculator } from "@/components/estate/MortgageCalculator";
 import { Regions } from "@/components/estate/Regions";
 import { Testimonials } from "@/components/estate/Testimonials";
-import { Blog } from "@/components/estate/Blog";
 import { SellerCTA } from "@/components/estate/SellerCTA";
 import { Footer } from "@/components/estate/Footer";
 
@@ -22,7 +21,6 @@ const Index = () => {
       <MortgageCalculator />
       <Regions />
       <Testimonials />
-      <Blog />
       <SellerCTA />
       <Footer />
     </main>

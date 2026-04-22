@@ -80,7 +80,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="font-display text-cream text-5xl md:text-7xl lg:text-8xl leading-[1.05] max-w-5xl text-balance"
+          className="font-display text-cream text-4xl md:text-5xl lg:text-6xl leading-[1.1] max-w-4xl text-balance"
         >
           Find Your Perfect Home <em className="text-gold not-italic">Across the UK</em>
         </motion.h1>
@@ -109,7 +109,7 @@ export const Hero = () => {
                 className={cn(
                   "px-6 py-3 text-sm font-medium rounded-t-md transition-all duration-300 ease-luxe relative",
                   tab === t
-                    ? "bg-cream text-navy"
+                    ? "bg-gold text-navy"
                     : "bg-navy/40 text-cream/70 hover:bg-navy/60 hover:text-cream backdrop-blur-md"
                 )}
               >
