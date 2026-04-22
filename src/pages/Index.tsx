@@ -1,16 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navbar } from "@/components/estate/Navbar";
+import { Hero } from "@/components/estate/Hero";
+import { PropertyTypes } from "@/components/estate/PropertyTypes";
+import { FeaturedListings } from "@/components/estate/FeaturedListings";
+import { WhyChoose } from "@/components/estate/WhyChoose";
+import { MortgageCalculator } from "@/components/estate/MortgageCalculator";
+import { Regions } from "@/components/estate/Regions";
+import { Testimonials } from "@/components/estate/Testimonials";
+import { Blog } from "@/components/estate/Blog";
+import { SellerCTA } from "@/components/estate/SellerCTA";
+import { Footer } from "@/components/estate/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <main className="bg-background min-h-screen">
+      <Navbar />
+      <h1 className="sr-only">EstateEdge UK — Premium UK property listings, mortgages and area guides</h1>
+      <Hero />
+      <PropertyTypes />
+      <FeaturedListings />
+      <WhyChoose />
+      <MortgageCalculator />
+      <Regions />
+      <Testimonials />
+      <Blog />
+      <SellerCTA />
+      <Footer />
+    </main>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
