@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
-import { Home, Building2, Building, Warehouse, TreePine, Sparkles, Briefcase, GraduationCap } from "lucide-react";
+import { Home, Building, Warehouse, TreePine, Sparkles, Briefcase } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const types = [
-  { icon: Home, label: "Detached House", count: "3,240" },
-  { icon: Building2, label: "Semi-Detached", count: "5,180" },
-  { icon: Building, label: "Flat / Apartment", count: "8,920" },
-  { icon: Warehouse, label: "Terraced", count: "4,650" },
-  { icon: TreePine, label: "Bungalow", count: "1,420" },
-  { icon: Sparkles, label: "New Build", count: "2,310" },
-  { icon: Briefcase, label: "Commercial", count: "890" },
-  { icon: GraduationCap, label: "Student", count: "1,640" },
+  { icon: Home, label: "Houses", count: "13,070", slug: "houses" },
+  { icon: Building, label: "Apartments", count: "8,920", slug: "apartments" },
+  { icon: TreePine, label: "Bungalows", count: "1,420", slug: "bungalows" },
+  { icon: Sparkles, label: "New Builds", count: "2,310", slug: "new-builds" },
+  { icon: Briefcase, label: "Commercial", count: "890", slug: "commercial" },
+  { icon: Warehouse, label: "Terraced", count: "4,650", slug: "terraced" },
 ];
 
 export const PropertyTypes = () => {
@@ -36,27 +35,31 @@ export const PropertyTypes = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {types.map((t, i) => (
-            <motion.button
+            <motion.div
               key={t.label}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative bg-card rounded-md p-6 md:p-8 text-left shadow-soft hover:shadow-luxe transition-all duration-500 ease-luxe hover:-translate-y-1 border border-transparent hover:border-gold/40 overflow-hidden"
             >
-              <div className="absolute -right-12 -top-12 w-32 h-32 rounded-full bg-gold/0 group-hover:bg-gold/10 transition-all duration-700 ease-luxe" />
-              <div className="relative">
-                <div className="h-12 w-12 rounded-sm bg-navy text-gold flex items-center justify-center mb-5 group-hover:bg-gradient-gold group-hover:text-navy transition-all duration-500 ease-luxe">
-                  <t.icon size={22} strokeWidth={1.5} />
+              <Link
+                to={`/category/${t.slug}`}
+                className="group relative bg-card block h-full rounded-md p-6 md:p-8 text-left shadow-soft hover:shadow-luxe transition-all duration-500 ease-luxe hover:-translate-y-1 border border-transparent hover:border-gold/40 overflow-hidden"
+              >
+                <div className="absolute -right-12 -top-12 w-32 h-32 rounded-full bg-gold/0 group-hover:bg-gold/10 transition-all duration-700 ease-luxe" />
+                <div className="relative">
+                  <div className="h-12 w-12 rounded-sm bg-navy text-gold flex items-center justify-center mb-5 group-hover:bg-gradient-gold group-hover:text-navy transition-all duration-500 ease-luxe">
+                    <t.icon size={22} strokeWidth={1.5} />
+                  </div>
+                  <div className="font-display text-lg text-navy group-hover:text-gold-dark transition-colors">
+                    {t.label}
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1">{t.count} listings</div>
                 </div>
-                <div className="font-display text-lg text-navy group-hover:text-gold-dark transition-colors">
-                  {t.label}
-                </div>
-                <div className="text-xs text-muted-foreground mt-1">{t.count} listings</div>
-              </div>
-            </motion.button>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>

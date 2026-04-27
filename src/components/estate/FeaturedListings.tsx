@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Bed, Bath, Square, MapPin, Heart, ArrowUpRight, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 import p1 from "@/assets/property-1.jpg";
 import p2 from "@/assets/property-2.jpg";
 import p3 from "@/assets/property-3.jpg";
@@ -9,6 +10,7 @@ import p6 from "@/assets/property-6.jpg";
 import { cn } from "@/lib/utils";
 
 type Listing = {
+  id: string;
   img: string;
   badge: "For Sale" | "To Rent";
   price: string;
@@ -24,6 +26,7 @@ type Listing = {
 
 const listings: Listing[] = [
   {
+    id: "1",
     img: p1,
     badge: "For Sale",
     price: "£1,250,000",
@@ -34,6 +37,7 @@ const listings: Listing[] = [
     transport: "8 min to Richmond Station",
   },
   {
+    id: "2",
     img: p2,
     badge: "To Rent",
     price: "£650 pw",
@@ -44,6 +48,7 @@ const listings: Listing[] = [
     transport: "3 min to Canary Wharf Tube",
   },
   {
+    id: "3",
     img: p3,
     badge: "For Sale",
     price: "£425,000",
@@ -54,6 +59,7 @@ const listings: Listing[] = [
     transport: "12 min to East Didsbury Tram",
   },
   {
+    id: "4",
     img: p4,
     badge: "For Sale",
     price: "£875,000",
@@ -64,6 +70,7 @@ const listings: Listing[] = [
     transport: "5 min to Princes Street",
   },
   {
+    id: "5",
     img: p5,
     badge: "For Sale",
     price: "£295,000",
@@ -74,6 +81,7 @@ const listings: Listing[] = [
     transport: "10 min to Five Ways Station",
   },
   {
+    id: "6",
     img: p6,
     badge: "To Rent",
     price: "£1,800 pcm",
@@ -106,16 +114,17 @@ export const FeaturedListings = () => {
               Featured <em className="text-gold-dark not-italic">Properties</em>
             </h2>
           </motion.div>
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="group flex items-center gap-2 text-navy hover:text-gold-dark transition-colors font-medium"
           >
-            View all listings
-            <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </motion.button>
+            <Link to="/listings" className="group flex items-center gap-2 text-navy hover:text-gold-dark transition-colors font-medium">
+              View all listings
+              <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </Link>
+          </motion.div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
@@ -146,58 +155,60 @@ const ListingCard = ({ listing, index }: { listing: Listing; index: number }) =>
       transition={{ duration: 0.7, delay: (index % 3) * 0.12, ease: [0.22, 1, 0.36, 1] }}
       className="group bg-card rounded-md overflow-hidden shadow-soft hover-lift cursor-pointer"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-        <img
-          src={listing.img}
-          alt={listing.title}
-          loading="lazy"
-          width={1024}
-          height={768}
-          className="h-full w-full object-cover transition-transform duration-[1.2s] ease-luxe group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <Link to={`/property/${listing.id}`}>
+        <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+          <img
+            src={listing.img}
+            alt={listing.title}
+            loading="lazy"
+            width={1024}
+            height={768}
+            className="h-full w-full object-cover transition-transform duration-[1.2s] ease-luxe group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        <div className="absolute top-4 left-4 flex items-center gap-2">
-          <span className={cn(
-            "px-3 py-1 text-[11px] uppercase tracking-widest font-semibold rounded-sm",
-            listing.badge === "For Sale" ? "bg-gradient-gold text-navy" : "bg-navy text-cream"
-          )}>
-            {listing.badge}
-          </span>
-          <span className={cn("flex items-center gap-1 px-2 py-1 text-[11px] text-white font-semibold rounded-sm", epcColors[listing.epc])}>
-            <Zap size={11} /> EPC {listing.epc}
-          </span>
-        </div>
+          <div className="absolute top-4 left-4 flex items-center gap-2">
+            <span className={cn(
+              "px-3 py-1 text-[11px] uppercase tracking-widest font-semibold rounded-sm",
+              listing.badge === "For Sale" ? "bg-gradient-gold text-navy" : "bg-navy text-cream"
+            )}>
+              {listing.badge}
+            </span>
+            <span className={cn("flex items-center gap-1 px-2 py-1 text-[11px] text-white font-semibold rounded-sm", epcColors[listing.epc])}>
+              <Zap size={11} /> EPC {listing.epc}
+            </span>
+          </div>
 
-        <button className="absolute top-4 right-4 h-9 w-9 rounded-full bg-cream/95 backdrop-blur flex items-center justify-center text-navy hover:bg-gold hover:text-navy transition-colors">
-          <Heart size={16} />
-        </button>
-
-        <div className="absolute bottom-4 inset-x-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-luxe">
-          <button className="w-full bg-gradient-gold text-navy font-semibold py-2.5 rounded-sm flex items-center justify-center gap-2 shadow-gold">
-            View Details <ArrowUpRight size={16} />
+          <button className="absolute top-4 right-4 h-9 w-9 rounded-full bg-cream/95 backdrop-blur flex items-center justify-center text-navy hover:bg-gold hover:text-navy transition-colors">
+            <Heart size={16} />
           </button>
-        </div>
-      </div>
 
-      <div className="p-6">
-        <div className="font-display text-2xl text-navy">{listing.price}</div>
-        <h3 className="mt-1 font-medium text-navy">{listing.title}</h3>
-        <div className="mt-1 text-sm text-muted-foreground flex items-center gap-1">
-          <MapPin size={13} /> {listing.location}
+          <div className="absolute bottom-4 inset-x-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-luxe">
+            <div className="w-full bg-gradient-gold text-navy font-semibold py-2.5 rounded-sm flex items-center justify-center gap-2 shadow-gold text-center">
+              View Details <ArrowUpRight size={16} />
+            </div>
+          </div>
         </div>
 
-        <div className="mt-5 pt-5 border-t border-border flex items-center justify-between text-sm text-muted-foreground">
-          <Spec icon={Bed} value={listing.beds === 0 ? "Studio" : `${listing.beds} bed`} />
-          <Spec icon={Bath} value={`${listing.baths} bath`} />
-          <Spec icon={Square} value={`${listing.sqft.toLocaleString()} sqft`} />
-        </div>
+        <div className="p-6">
+          <div className="font-display text-2xl text-navy">{listing.price}</div>
+          <h3 className="mt-1 font-medium text-navy">{listing.title}</h3>
+          <div className="mt-1 text-sm text-muted-foreground flex items-center gap-1">
+            <MapPin size={13} /> {listing.location}
+          </div>
 
-        <div className="mt-4 flex items-center justify-between text-[11px] text-muted-foreground uppercase tracking-wider">
-          <span>Council Tax {listing.council}</span>
-          <span className="text-gold-dark">{listing.transport}</span>
+          <div className="mt-5 pt-5 border-t border-border flex items-center justify-between text-sm text-muted-foreground">
+            <Spec icon={Bed} value={listing.beds === 0 ? "Studio" : `${listing.beds} bed`} />
+            <Spec icon={Bath} value={`${listing.baths} bath`} />
+            <Spec icon={Square} value={`${listing.sqft.toLocaleString()} sqft`} />
+          </div>
+
+          <div className="mt-4 flex items-center justify-between text-[11px] text-muted-foreground uppercase tracking-wider">
+            <span>Council Tax {listing.council}</span>
+            <span className="text-gold-dark">{listing.transport}</span>
+          </div>
         </div>
-      </div>
+      </Link>
     </motion.article>
   );
 };

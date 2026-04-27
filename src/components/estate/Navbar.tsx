@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -6,16 +6,18 @@ import { cn } from "@/lib/utils";
 import logoImg from "@/assets/logo.png";
 
 const links = [
-  { label: "Buy", href: "#" },
-  { label: "Rent", href: "#" },
-  { label: "Sell", href: "#" },
-  { label: "New Homes", href: "#" },
-  { label: "Mortgages", href: "#calculator" },
+  { label: "Buy", to: "/listings?type=sale" },
+  { label: "Rent", to: "/listings?type=rent" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+  { label: "Mortgages", to: "/#calculator" },
 ];
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -31,7 +33,7 @@ export const Navbar = () => {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-luxe",
-        scrolled
+        !isHome || scrolled
           ? "bg-navy/95 backdrop-blur-md border-b border-white/5 py-3"
           : "bg-transparent py-5"
       )}
@@ -44,20 +46,22 @@ export const Navbar = () => {
 
         <nav className="hidden lg:flex items-center gap-9">
           {links.map((l) => (
-            <a
+            <Link
               key={l.label}
-              href={l.href}
+              to={l.to}
               className="text-sm text-cream/85 hover:text-gold transition-colors link-gold font-medium"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="hidden lg:block">
-          <button className="px-5 py-2.5 bg-gradient-gold text-navy font-semibold text-sm rounded-sm shadow-gold hover:shadow-luxe transition-all duration-500 ease-luxe hover:-translate-y-0.5">
-            List Property
-          </button>
+          <Link to="/contact">
+            <button className="px-5 py-2.5 bg-gradient-gold text-navy font-semibold text-sm rounded-sm shadow-gold hover:shadow-luxe transition-all duration-500 ease-luxe hover:-translate-y-0.5">
+              List Property
+            </button>
+          </Link>
         </div>
 
         <button
@@ -80,18 +84,20 @@ export const Navbar = () => {
           >
             <div className="container py-6 flex flex-col gap-5">
               {links.map((l) => (
-                <a
+                <Link
                   key={l.label}
-                  href={l.href}
+                  to={l.to}
                   className="text-cream/85 hover:text-gold transition-colors"
                   onClick={() => setOpen(false)}
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
-              <button className="px-5 py-3 bg-gradient-gold text-navy font-semibold rounded-sm">
-                List Property
-              </button>
+              <Link to="/contact" onClick={() => setOpen(false)}>
+                <button className="w-full px-5 py-3 bg-gradient-gold text-navy font-semibold rounded-sm">
+                  List Property
+                </button>
+              </Link>
             </div>
           </motion.div>
         )}
